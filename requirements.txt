@@ -1,5 +1,7 @@
 streamlit
-python-dotenv
-httpx
-pydantic
+yfinance
+plotly
+pandas
 openai
+python-dotenv
+pydantic

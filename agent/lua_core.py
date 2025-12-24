@@ -1,28 +1,35 @@
+# sjhong76/agent/lua_core.py
 import os
 from openai import OpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
 
 class LUAAgent:
     def __init__(self):
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        self.model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+        self.model = "gpt-4o-mini"
 
-    def get_system_prompt(self, step, user_name="주인님"):
-        prompts = {
-            "opening": "당신은 LUA입니다. 친절하게 이름과 생년월일을 요청하세요.",
-            "trading": f"{user_name}님의 주문을 통역하세요. 종목, 수량, 구분을 명확히 추출해야 합니다.",
-            "confirm": "주문 내용을 요약하고 최종 확인을 받으세요. 2-step 확인 원칙을 지키세요."
-        }
-        return prompts.get(step, "친절한 투자 조력자 LUA입니다.")
-
-    def ask_llm(self, step, message, user_name="주인님"):
+    def get_lua_response(self, user_message, current_step):
+        """귀여운 LUA가 대화를 이끌며 단계를 전환합니다."""
+        system_prompt = f"""
+        당신은 1030 초보 투자자를 위한 귀엽고 친절한 AI 조력자 'LUA'입니다.
+        주인님과 친구처럼 다정하게 대화하세요. (~예요, ~해요 등 귀여운 말투 사용)
+        
+        [현재 단계: {current_step}]
+        1. 주인님의 질문에 친절하게 답해주세요.
+        2. 만약 주인님이 '매수', '잔고 확인' 등 특정 액션을 원하면, 
+           "네! 그럼 바로 {current_step}에서 다음 단계로 안내해 드릴게요!"라고 밝게 답하세요.
+        3. 절대 30년 베테랑 아저씨처럼 딱딱하거나 훈계하는 말투를 쓰지 마세요.
+        """
+        
         response = self.client.chat.completions.create(
             model=self.model,
             messages=[
-                {"role": "system", "content": self.get_system_prompt(step, user_name)},
-                {"role": "user", "content": message}
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message}
             ]
         )
         return response.choices[0].message.content
+
+    def get_veteran_chart_comment(self, ticker, trend_data):
+        """차트 요약 전용: 30년 베테랑 아저씨의 날카로운 분석"""
+        # 이 부분에서만 아저씨 말투를 사용합니다.
+        return f"허허, {ticker}의 흐름을 보니... 이 {trend_data}은 무시 못 하지. 수급이 꼬이지 않게 조심해야 해."

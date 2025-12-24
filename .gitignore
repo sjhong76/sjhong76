@@ -1,56 +1,5 @@
-# 1. 보안 및 환경 설정 (가장 중요)
 .env
-.env.local
-.env.*.local
-*.pem
-*.key
-
-# 2. Python 캐시 및 빌드 아티팩트
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# 3. 가상 환경 (Virtual Environments)
+*.pyc
 venv/
-.venv/
-env/
-.env/
-ENV/
-env.bak/
-venv.bak/
-
-# 4. Streamlit 및 프로젝트 관련 설정
-.streamlit/config.toml
-.streamlit/secrets.toml
-.ipynb_checkpoints
-
-# 5. OS 관련 불필요한 파일
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# 6. IDE 관련 설정 (VS Code)
-.vscode/
-.idea/
-*.swp
+.streamlit/

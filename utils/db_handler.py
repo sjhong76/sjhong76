@@ -1,14 +1,13 @@
 # sjhong76/utils/db_handler.py
+
 class DBHandler:
     def __init__(self):
         pass
 
-    async def get_user_portfolio(self, user_id: str):
-        """유저의 수익률 상태를 조회합니다."""
-        # 실무 포인트: 손실률이 높을 경우 시스템 프롬프트에 '위로 가중치'를 부여하게 됩니다.
-        return {
-            "user_id": user_id,
-            "status": "loss", 
-            "loss_rate": -15.2, # 15% 손실 상태 가정
-            "holdings": ["삼성전자", "현대차"]
-        }
+    async def get_user_portfolio(self, name: str, dob: str):
+        """
+        테스트 케이스: 현재는 계좌가 없는 사용자(New User)로 고정합니다. [cite: 160]
+        나중에 실제 MongoDB 연동 시 이 부분을 쿼리 로직으로 교체합니다.
+        """
+        # return {"account_id": "KIWOOM_123"} # 기존 계좌가 있을 때
+        return None # 계좌가 없는 상태 (STEP 3-B 루트) [cite: 36]
