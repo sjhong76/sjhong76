@@ -1,4 +1,4 @@
-# LUA (Lazy User Agent) 🌙
+# LUA (Lazy yoU Agent) 🌙
 > **"복잡함은 AI가, 당신은 대화만"** - 채팅형 주식 트레이딩 플랫폼
 
 ## 🛠 Tech Stack
